@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/estilo.css">
+        <script src="/js/script.js"></script>
+    </head>
+        <body>
+            <header id="topo">
+                <h1 class="texto">ACMI FOR MANAGER</h1>
+                <div id="buttons">
+                <a href="../index.html"><img src="../img/home.png" alt="ícone com uma casa indicando a página inicial"></a> 
+                <a href="notifi.html"><img src="../img/bell.png" alt="ícone com um sino indicando as notificações"></a>
+            </div>
+            </header>
+<main id="main">
+    <h1>Relatório de manutenção</h1>
+    <form id="form4" name="busca">
+    <input type="text" name="aviao" id="aviao" placeholder="Avião">     
+    <input type="text" name="numman" id="numman" placeholder="N° da manutenção">
+    <input type="text" name="data" id="data" placeholder="Data"> 
+    <input type="text" name="mot" id="mot" placeholder="Motivo">   
+    <button onclick="getRelatorios()" style="align-self: flex-end;" type="submit"><img src="../img/lupa.png"></button>
+</form>
+    <p>Manutenções que atendem aos filtros</p>
+    <div id="results">
+    </div>
+    </div>
+</main>
+<footer id="rodape">
+<p>Desenvolvido por alunos da Fatec Zona Leste</p>
+<p>Todos os direitos reservados &copy;</p>
+</footer>
+        </body>
+</html>

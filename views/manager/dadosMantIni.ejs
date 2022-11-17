@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/manager/estilo.css">
+
+</head>
+
+<body>
+    <header id="topo">
+        <h1 class="texto">ACME FOR MANAGER</h1>
+        <div id="buttons">
+            <a href="/manager/"><img src="../images/manager/home.png"
+                    alt="ícone com uma casa indicando a página inicial"></a>
+            <a href="notifi.html"><img src="../images/manager/bell.png"
+                    alt="ícone com um sino indicando as notificações"></a>
+        </div>
+    </header>
+    <main id="main">
+        <h1>Dados da aeronave</h1>
+        <% if(added && peca) { %>
+            <span> Peça cadastrado com sucesso! </span>
+        <% } else if(added) { %>
+            <span> Avião cadastrado com sucesso! </span>
+        <% } %>
+        <div id="forms">
+            <form id="form1" name="manterAviao" method="POST" action="/manager/dadosMantIni/aviao">
+
+                <p>Avião</p>
+                <label class="label" for="numserie">N° de série</label>
+                <input type="number" id="numserie" name="numserie" required>
+
+                <label class="label" for="fabricante">Fabricante</label>
+                <input type="text" id="fab" name="fab" required>
+
+                <label class="label" for="tamtotal">Tamanho total</label>
+                <input type="text" id="tamtotal" name="tamtotal" required>
+
+                <label class="label" for="tamasa">Tamanho da asa</label>
+                <input type="text" id="tamasa" name="tamasa" required>
+
+                <label class="label" for="velocidade">Velocidade</label>
+                <input type="text" id="vel" name="vel" required>
+
+                <label class="label" for="qntassentos">Quantidade de assentos</label>
+                <input type="number" id="qntassentos" name="qntassentos" required>
+
+                <label class="label" for="modelo">Modelo do avião</label>
+                <input type="text" id="mod" name="mod" required>
+
+                <label class="label" for="obs">Observações</label>
+                <input type="text" id="obs" name="obs">
+
+                <div id="btns">
+                    <button type="reset"><img src="/images/manager/cancelar.png"></button>
+                    <button type="submit"><img src="../images/manager/pasta.png"></button>
+                </div>
+            </form>
+            <hr>
+            <form id="form1" name="iniciarComp" method="POST" action="/manager/dadosMantIni/peca">
+                <p>Peças</p>
+                <label>Avião:
+                <input list="avioes" name="aviao" /></label>
+                <datalist id="avioes">
+                    <% avioes.map( avi => { %>
+                        <option value="<%= avi.nserie %>">
+                    <% }); %>
+                </datalist>
+                <label for="descricao">Descrição</label>
+                <input type="text" id="des" name="des" required>
+                <label for="fabricante">Fabricante</label>
+                <input type="text" id="fab" name="fab" required>
+                <label for="numserie">N° de série</label>
+                <input type="number" id="numserie" name="numserie" required>
+                <label for="usopeca">Uso da peça</label>
+                <input type="number" id="usopeca" name="usopeca" required>
+                <label for="usopeca">Tempo até a troca</label>
+                <input type="number" id="troca" name="troca" required>
+                <label for="forn">Fornecedor</label>
+                <input type="text" id="forn" name="forn" required>
+                <label for="lote">Lote</label>
+                <input type="number" id="lote" name="lote" required>
+                <label for="val">Valor</label>
+                <input type="number" id="val" name="val" required>
+                <div id="btns">
+                    <button type="reset"><img src="../images/manager/cancelar.png"></button>
+                    <button type="submit"><img src="../images/manager/pasta.png"></button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer id="rodape">
+        <p>Desenvolvido por alunos da Fatec Zona Leste</p>
+        <p>Todos os direitos reservados &copy;</p>
+    </footer>
+</body>
+
+</html>
