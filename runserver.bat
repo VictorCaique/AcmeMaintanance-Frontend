@@ -1,4 +1,3 @@
-C:\
-cd C:\Projects\AcmeMaintanance-frontend
-start npm run debug
+start npm i & npm run debug
+
 pause
