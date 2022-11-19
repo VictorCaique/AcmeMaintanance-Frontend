@@ -13,6 +13,7 @@ body {
     align-items: center;
     padding-left: 50px;
     padding-right: 50px;
+    width: auto;
 
 }
 
@@ -22,6 +23,7 @@ body {
 #topo h1{
     color: #FFF;
     font-weight: lighter;
+    padding-left: 20px;
 }
 
 #main h1{
@@ -237,14 +239,37 @@ h3 {
     margin-left: 40px;
 }
 
-#table th{
-    padding: 10px;
-}
 #table p{
     font-weight: normal;
 }
 
-@media only screen and (max-width: 600px) {
+@media(max-width: 400px) {
+
+    body {
+        margin: 0px;
+        display: flex;
+        flex-direction: column;
+        height: max-content;
+        align-items: center;
+    }
+
+    #topo {
+        display: flex;
+        height: 50px;
+        background-color: #2980b9;
+        justify-content: space-between;
+        align-items: center;
+        padding:0;
+        width: 100%;
+    
+    }
+
+    #main h1{
+        font-weight: lighter;
+        font-family: Arial, Helvetica, sans-serif;
+        padding-bottom: 30px;
+        font-size: 25px;
+    }
 
     #menu1,
     #menu2 {
@@ -252,7 +277,6 @@ h3 {
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        width: 100vw;
         padding-top: 0px;
     }
 
@@ -269,6 +293,14 @@ h3 {
         justify-content: center;
         align-items: center;
         border-color: #000;*/
+    }
+
+    #table{
+        width: auto;
+    }
+
+    #buttons{
+        display: flex;
     }
 
     #menu1,
@@ -298,6 +330,7 @@ h3 {
         flex-direction: column;
         margin: 10px;
         flex: 1;
+        width: auto;;
     }
 
     #form2 {

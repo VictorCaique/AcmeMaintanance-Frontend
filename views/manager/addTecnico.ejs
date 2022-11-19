@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/stylesheets/manager/estilo.css">
+    <link rel="stylesheet" href="/public/stylesheets/manager/estilo.css">
 
 </head>
 
@@ -13,9 +13,9 @@
     <header id="topo">
         <h1 class="texto">ACME FOR MANAGER</h1>
         <div id="buttons">
-            <a href="/manager/"><img src="../images/manager/home.png"
+            <a href="/manager/"><img src="/public/images/manager/home.png"
                     alt="ícone com uma casa indicando a página inicial"></a>
-            <a href="/manager/notifi"><img src="../images/manager/bell.png"
+            <a href="/manager/notifi"><img src="/public/images/manager/bell.png"
                     alt="ícone com um sino indicando as notificações"></a>
         </div>
     </header>
@@ -32,7 +32,7 @@
             <label for="cpf">CPF</label>
             <input type="number" id="cpf" name="cpf">
             
-            <label for="endereco">Endereco</label>
+            <label for="endereco">Endereço</label>
             <input type="text" id="endereco" name="endereco">
             
             <label for="setor">Setor</label>
@@ -43,7 +43,9 @@
             
             <label for="gerente">Gerente</label>
             <input type="text" id="gerente" name="gerente">
-        </form>
+            <div id="btns">
+            <button type="submit"><img src="/public/images/manager/pasta.png"></button>        </form>
+        </div>
         </div>
 
     </main>

@@ -4,27 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/manager/estilo.css">
+    <link rel="stylesheet" href="/public/stylesheets/manager/estilo.css">
 
 </head>
 
 <body>
     <header id="topo">
         <h1 class="texto">ACME FOR MANAGER</h1>
-        <a href="/manager/notifi"><img src="../images/manager/bell.png"
+        <a href="notifi.ejs"><img src="/public/images/manager/bell.png"
                 alt="ícone com um sino indicando as notificações"></a>
     </header>
     <main id="main">
         <div id="menu1">
-            <h2 id="opt"><a href="/manager/dadosMantIni">Dados do avião</a></h1>
-                <h2 id="opt"><a href="/manager/planMan">Planejar manutenção</a></h1>
-                    <h2 id="opt"><a href="/manager/relMan">Relatório de manutenção</a></h1>
+            <h2 id="opt"><a href="/manager/dadosMantIni.ejs">Dados do avião</a></h2>
+                <h2 id="opt"><a href="planMan.ejs">Planejar manutenção</a></h2>
+                    <h2 id="opt"><a href="relMan.ejs">Relatório de manutenção</a></h2>
         </div>
         <div id="menu2">
-            <h2 id="opt"><a href="/manager/dadosUso">Dados de uso do avião</a></h1>
-                <h2 id="opt"><a href="/manager/dadosMantIni">Inicializar componentes</a></h1>
-                    <h2 id="opt"><a href="addTecnico.ejs">Adicionar técnico/a></h1>
-                        <h2 id="opt"><a href="/manager/ajuda">Ajuda</a></h1>
+            <h2 id="opt"><a href="dadosUso.ejs">Dados de uso do avião</a></h2>
+                <h2 id="opt"><a href="dadosMantIni.ejs">Inicializar componentes</a></h2>
+                    <h2 id="opt"><a href="addTecnico.ejs">Adicionar técnico</a></h2>
+                        <h2 id="opt"><a href="ajuda.ejs">Ajuda</a></h2>
         </div>
         </div>
     </main>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/manager/estilo.css">
+    <link rel="stylesheet" href="/public/stylesheets/manager/estilo.css">
 
 </head>
 
@@ -12,9 +12,9 @@
     <header id="topo">
         <h1 class="texto">ACME FOR MANAGER</h1>
         <div id="buttons">
-            <a href="/manager/"><img src="../images/manager/home.png"
+            <a href="/manager/"><img src="/public/images/manager/home.png"
                     alt="ícone com uma casa indicando a página inicial"></a>
-            <a href="/manager/notifi/"><img src="../images/manager/bell.png"
+            <a href="/manager/notifi/"><img src="/public/images/manager/bell.png"
                     alt="ícone com um sino indicando as notificações"></a>
         </div>
     </header>
@@ -27,7 +27,7 @@
                     <option value="<%= avi.nserie %>">
                 <% }); %>
             </datalist>
-            <button type="submit"><img src="../images/manager/lupa.png"></button>
+            <button type="submit"><img src="/public/images/manager/lupa.png"></button>
         </form>
         <div id="forms">
             <form autocomplete="off" id="form1" name="manterAviao" method="POST" action="/manager/planMan/manutencao">
@@ -69,8 +69,8 @@
                     </div>
                 </div>
                 <div id="btns">
-                    <button type="reset"><img src="../images/manager/cancelar.png"></button>
-                    <button type="submit"><img src="../images/manager/pasta.png"></button>
+                    <button type="reset"><img src="/public/images/manager/cancelar.png"></button>
+                    <button type="submit"><img src="/public/images/manager/pasta.png"></button>
                 </div>
             </form>
             <hr>

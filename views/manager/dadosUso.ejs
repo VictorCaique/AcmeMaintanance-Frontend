@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/stylesheets/manager/estilo.css">
+    <link rel="stylesheet" href="/public/stylesheets/manager/estilo.css">
 
 </head>
 
@@ -13,9 +13,9 @@
     <header id="topo">
         <h1 class="texto">ACME FOR MANAGER</h1>
         <div id="buttons">
-            <a href="/manager/"><img src="../images/manager/home.png"
+            <a href="/manager/"><img src="/public/images/manager/home.png"
                     alt="ícone com uma casa indicando a página inicial"></a>
-            <a href="/manager/notifi"><img src="../images/manager/bell.png"
+            <a href="/manager/notifi"><img src="/public/images/manager/bell.png"
                     alt="ícone com um sino indicando as notificações"></a>
         </div>
     </header>
@@ -29,7 +29,7 @@
                 <option value="<%= avi.nserie %>">
                     <% }); %>
             </datalist>
-            <button type="submit"><img src="../images/manager/lupa.png"></button>
+            <button type="submit"><img src="/public/images/manager/lupa.png"></button>
         </form>
         <form id="form1" name="manterAviao" action="#">
             <label for="fabricante">Fabricante</label>
@@ -77,6 +77,9 @@
                     <th>
                         <p>Descrição</p>
                     </th>
+                    <tr>
+                        <p><%= value.descricao %></p>
+                    </tr>
                     <th>
                         <p>Nº de série da peça</p>
                     </th>
@@ -103,9 +106,6 @@
                     aviao.componentes.map((value, index) => {
                     %>
                 <tr>
-                    <td>
-                        <p><%= value.descricao %></p>
-                    </td>
                     <td>
                         <p><%= value.nserie %></p>
                     </td>
