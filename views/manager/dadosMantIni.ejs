@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/stylesheets/manager/estilo.css">
+    <link rel="stylesheet" href="../stylesheets/manager/estilo.css">
 
 </head>
 
@@ -12,9 +12,9 @@
     <header id="topo">
         <h1 class="texto">ACME FOR MANAGER</h1>
         <div id="buttons">
-            <a href="/manager/"><img src="/public/images/manager/home.png"
+            <a href="/manager/"><img src="../images/manager/home.png"
                     alt="ícone com uma casa indicando a página inicial"></a>
-            <a href="notifi.html"><img src="/public/images/manager/bell.png"
+            <a href="notifi.html"><img src="../images/manager/bell.png"
                     alt="ícone com um sino indicando as notificações"></a>
         </div>
     </header>
@@ -26,7 +26,7 @@
             <span> Avião cadastrado com sucesso! </span>
         <% } %>
         <div id="forms">
-            <form id="form1" name="manterAviao" method="POST" action="/manager/dadosMantIni/aviao">
+            <form id="form1" name="manterAviao" method="POST" action="/manager/dadosMantIni/aviao" autocomplete="off">
 
                 <p>Avião</p>
                 <label class="label" for="numserie">N° de série</label>
@@ -54,17 +54,17 @@
                 <input type="text" id="obs" name="obs">
 
                 <div id="btns">
-                    <button type="reset"><img src="/public/images/manager/cancelar.png"></button>
-                    <button type="submit"><img src="/public/images/manager/pasta.png"></button>
+                    <button type="reset"><img src="../images/manager/cancelar.png"></button>
+                    <button type="submit"><img src="../images/manager/pasta.png"></button>
                 </div>
             </form>
             <hr>
-            <form id="form1" name="iniciarComp" method="POST" action="/manager/dadosMantIni/peca">
+            <form id="form1" name="iniciarComp" method="POST" action="/manager/dadosMantIni/peca" autocomplete="off">
                 <p>Peças</p>
                 <label>Avião:
                 <input list="avioes" name="aviao" /></label>
                 <datalist id="avioes">
-                    <% avioes.map( avi => { %>
+                    <% if(avioes != 0) avioes.map( avi => { %>
                         <option value="<%= avi.nserie %>">
                     <% }); %>
                 </datalist>
@@ -85,8 +85,8 @@
                 <label for="val">Valor</label>
                 <input type="number" id="val" name="val" required>
                 <div id="btns">
-                    <button type="reset"><img src="/public/images/manager/cancelar.png"></button>
-                    <button type="submit"><img src="/public/images/manager/pasta.png"></button>
+                    <button type="reset"><img src="../images/manager/cancelar.png"></button>
+                    <button type="submit"><img src="../images/manager/pasta.png"></button>
                 </div>
             </form>
         </div>

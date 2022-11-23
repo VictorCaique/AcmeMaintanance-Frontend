@@ -9,7 +9,8 @@ import {
     postManutencao,
     getAllTecnicos,
     getTecnicoById,
-    getManutencoesFuturas
+    getManutencoesFuturas,
+    postTecnico
 } from '../services/api.js'
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -26,19 +27,19 @@ router.get('/dadosMantIni', async function (req, res, next) {
         res.render('manager/dadosMantIni', {
             peca: true,
             added: true,
-            avioes: avioes
+            avioes: avioes.constructor === Array ? avioes : 0
         })
     } else if (req.query.added == 1) {
         res.render('manager/dadosMantIni', {
             peca: false,
             added: true,
-            avioes: avioes
+            avioes: avioes.constructor === Array ? avioes : 0
         })
     } else {
         res.render('manager/dadosMantIni', {
             peca: false,
             added: false,
-            avioes: avioes
+            avioes: avioes.constructor === Array ? avioes : 0
         })
     }
 });
@@ -83,6 +84,10 @@ router.post('/dadosMantIni/peca', async (req, res) => {
 // Planejar Manutenções
 
 router.get('/planMan', async (req, res) => {
+    var added = 0;
+    if (req.query.added == 1) added = 1;
+
+    
     if (req.query.aviao) {
         var aviao = await getAviaoByNserie(req.query.aviao);
         var avioes = await getAllAviao();
@@ -90,10 +95,11 @@ router.get('/planMan', async (req, res) => {
         var future = await getManutencoesFuturas(aviao.id)
 
         res.render('manager/planMan', {
-            avioes: avioes,
+            avioes: avioes.constructor === Array ? avioes : 0,
             aviao: aviao,
-            tecnicos: tecnicos,
-            future: future[0].avioes != undefined ? future : 0
+            tecnicos: tecnicos.constructor == Array ? tecnicos : 0,
+            future: future[0].avioes != undefined ? future : 0,
+            added: added
         })
     } else {
         var avioes = await getAllAviao();
@@ -101,10 +107,11 @@ router.get('/planMan', async (req, res) => {
 
 
         res.render('manager/planMan', {
-            avioes: avioes,
-            tecnicos: tecnicos,
+            avioes: avioes.constructor === Array ? avioes : 0,
+            tecnicos: tecnicos.constructor == Array ? tecnicos : 0,
             aviao: 0,
-            future: 0
+            future: 0,
+            added: added
         })
     }
 });
@@ -135,8 +142,8 @@ router.post('/planMan/manutencao', async (req, res) => {
 
     const manutencaoSaida = await postManutencao(JSON.stringify(manutencaoEntrada));
     console.log(manutencaoSaida);
-    res.send(manutencaoSaida)
-    //res.redirect('/manager/planMan?added=1');
+    //res.send(manutencaoSaida)
+    res.redirect('/manager/planMan?added=1');
 })
 
 // ######################################################################
@@ -148,14 +155,14 @@ router.get('/dadosUso', async (req, res) => {
         var avioes = await getAllAviao();
     
         res.render('manager/dadosUso', {
-            avioes: avioes,
+            avioes: avioes.constructor === Array ? avioes : 0,
             aviao: aviao,
         })
     } else {
         var avioes = await getAllAviao();
 
         res.render('manager/dadosUso', {
-            avioes: avioes,
+            avioes: avioes.constructor === Array ? avioes : 0,
             aviao: 0,
         })
     }
@@ -163,6 +170,37 @@ router.get('/dadosUso', async (req, res) => {
 
 router.post('/dadosUso/search', async (req, res) => {
     res.redirect(`/manager/dadosUso?aviao=${req.body.aviao}`)
+});
+
+// ######################################################################
+// Manter Tecnico
+
+router.get('/addTecnico', async (req, res) => {
+    if (req.query.added == 1) res.render('manager/addTecnico', {added: 1})
+    else res.render('manager/addTecnico', {added: 0})    
+});
+
+router.post('/addTecnico/tecnico', async (req, res) => {
+    const tecnico = {
+        "nome": req.body.nome,
+        "dataNasc": req.body.dataNasc,
+        "cpf": req.body.cpf,
+        "telefone": req.body.telefone,
+        "endereco": req.body.endereco,
+        "setor": req.body.setor,
+        "especializacao": req.body.especializacao,
+    }
+
+    const tecnicoSaida = await postTecnico(JSON.stringify(tecnico));
+    if (tecnicoSaida.id != undefined) res.redirect('/manager/addTecnico?added=1')
+    else res.redirect('/manager/addTecnico?error=1')
+});
+
+// ######################################################################
+// Ajuda
+
+router.get('/ajuda', async (req, res) => {
+    res.render('manager/ajuda')    
 });
 
 export default router;

@@ -134,20 +134,37 @@ export async function getManutencoesFuturas(idAviao) {
     let url = 'http://localhost:8080/manutencao/manutencoesFuturas';
 
     let options = {
-      method: 'GET',
+        method: 'GET',
     };
-    
+
     var manutencoes = fetch(url, options)
         .then(res => res.json())
         .then(json => json)
         .catch(err => 'error:' + err);
 
-    if (manutencoes.avioes != undefined){
+    if (manutencoes.avioes != undefined) {
         manutencoes.map((value, index) => {
             value.avioes[0].id == idAviao ? console.log("ID Avião = " + idAviao + "; ID Avião Manutenção = " + value.avioes[0].id) : manutencoes.splice(index, 1)
         })
-        return manutencoes    
-    }else{
-        return manutencoes    
+        return manutencoes
+    } else {
+        return manutencoes
     }
-} 
+}
+
+export async function postTecnico(tecnico) {
+    let url = 'http://localhost:8080/tecnico/';
+
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: tecnico
+    };
+
+    return fetch(url, options)
+        .then(res => res.json())
+        .then(json => json)
+        .catch(err => 'error:' + err);
+}
