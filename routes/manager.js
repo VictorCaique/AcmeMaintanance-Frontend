@@ -8,13 +8,47 @@ import {
     postPeca,
     postManutencao,
     getAllTecnicos,
-    getTecnicoById,
     getManutencoesFuturas,
-    postTecnico
+    postTecnico,
+    getManutencoes,
+    postNotificacao,
+    getNotificacoes,
+    getSearch,
+    getManutencaoById
 } from '../services/api.js'
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('manager/index');
+});
+
+router.get('/notifi', async function (req, res, next) {
+    const nots = await getNotificacoes();
+
+    res.render('manager/notifi', {
+        notificacoes: nots.constructor === Array ? nots : 0
+    });
+});
+
+router.get('/notifi/create', async function (req, res, next) {
+    var avioes = await getManutencoes()
+
+    console.log(avioes)
+
+    res.render('manager/notifiCreate', {
+        avioes: avioes
+    });
+});
+
+router.post('/notifi/create', async function (req, res, next) {
+    const not = {
+        "notificacao": req.body.desc,
+        "obs": req.body.prior
+    }
+
+    const notSaida = await postNotificacao(req.body.man, JSON.stringify(not));
+    console.log(notSaida);
+    res.redirect('/manager/notifi');
 });
 
 // ######################################################################
@@ -87,18 +121,20 @@ router.get('/planMan', async (req, res) => {
     var added = 0;
     if (req.query.added == 1) added = 1;
 
-    
+
     if (req.query.aviao) {
         var aviao = await getAviaoByNserie(req.query.aviao);
         var avioes = await getAllAviao();
         var tecnicos = await getAllTecnicos();
         var future = await getManutencoesFuturas(aviao.id)
 
+        console.log(future.constructor === Array)
+
         res.render('manager/planMan', {
             avioes: avioes.constructor === Array ? avioes : 0,
             aviao: aviao,
             tecnicos: tecnicos.constructor == Array ? tecnicos : 0,
-            future: future[0].avioes != undefined ? future : 0,
+            future: future.constructor === Array ? future : 0,
             added: added
         })
     } else {
@@ -124,12 +160,12 @@ router.post('/planMan/manutencao', async (req, res) => {
     let preId = req.body.tec.split(" ")
     preId = preId.reverse()
     preId = preId[0].slice(0, -1)
-    
+
 
     //var aviao = await getAviaoByNserie(req.body.aviao);
-    
+
     //var tecId = getTecnicoById(parseInt(preId))
-    
+
     const manutencaoEntrada = {
         "motivoManutencao": req.body.mot,
         "numeroManutencao": parseInt(req.body.num),
@@ -153,7 +189,7 @@ router.get('/dadosUso', async (req, res) => {
     if (req.query.aviao) {
         var aviao = await getAviaoByNserie(req.query.aviao);
         var avioes = await getAllAviao();
-    
+
         res.render('manager/dadosUso', {
             avioes: avioes.constructor === Array ? avioes : 0,
             aviao: aviao,
@@ -176,8 +212,12 @@ router.post('/dadosUso/search', async (req, res) => {
 // Manter Tecnico
 
 router.get('/addTecnico', async (req, res) => {
-    if (req.query.added == 1) res.render('manager/addTecnico', {added: 1})
-    else res.render('manager/addTecnico', {added: 0})    
+    if (req.query.added == 1) res.render('manager/addTecnico', {
+        added: 1
+    })
+    else res.render('manager/addTecnico', {
+        added: 0
+    })
 });
 
 router.post('/addTecnico/tecnico', async (req, res) => {
@@ -200,7 +240,65 @@ router.post('/addTecnico/tecnico', async (req, res) => {
 // Ajuda
 
 router.get('/ajuda', async (req, res) => {
-    res.render('manager/ajuda')    
+    res.render('manager/ajuda')
 });
+
+// ######################################################################
+// Relatorio
+
+router.get('/relMan', async (req, res) => {
+
+    if (req.query.search) {
+        const manutencoes = await getManutencoes();
+        const avioes = await getAllAviao();
+        const search = await getSearch(req.query.search);
+
+        console.log(search)
+
+        res.render('manager/relMan', {
+            avioes: avioes.constructor === Array ? avioes : 0,
+            manutencoes: manutencoes.constructor === Array ? manutencoes : 0,
+            search: search.constructor === Array ? search : 0
+        })
+    } else {
+        const manutencoes = await getManutencoes();
+        const avioes = await getAllAviao();
+
+        res.render('manager/relMan', {
+            avioes: avioes.constructor === Array ? avioes : 0,
+            manutencoes: manutencoes.constructor === Array ? manutencoes : 0,
+            search: 0
+        })
+    }
+
+
+});
+
+router.post('/relMan/buscar', async (req, res) => {
+    const searchParams = {
+        date: req.body.data.constructor === String ? req.body.data : " ",
+        motivo: req.body.mot.constructor === String ? req.body.mot : " ",
+        aviaoId: req.body.aviao.constructor === String ? req.body.aviao : " ",
+        numMan: req.body.numman.constructor === String ? req.body.numMan : " "
+    }
+
+    res.redirect(`/manager/relMan?search=${JSON.stringify(searchParams)}`)
+
+});
+
+router.post('/relManII', async (req, res) => {
+   res.redirect(`/manager/relManII?id=${req.body.id}`);
+});
+
+router.get('/relManII', async (req, res) => {
+    const man = await getManutencaoById(req.query.id);
+    
+
+    res.render('manager/relManII', {
+        manutencao: man
+    })
+});
+
+
 
 export default router;

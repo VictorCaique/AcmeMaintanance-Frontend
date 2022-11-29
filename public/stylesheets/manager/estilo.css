@@ -17,16 +17,17 @@ body {
 
 }
 
-#topo a{
+#topo a {
     padding: 15px;
 }
-#topo h1{
+
+#topo h1 {
     color: #FFF;
     font-weight: lighter;
     padding-left: 20px;
 }
 
-#main h1{
+#main h1 {
     font-weight: lighter;
     font-family: Arial, Helvetica, sans-serif;
     padding-bottom: 30px;
@@ -107,6 +108,7 @@ form {
     align-content: center;
     margin-top: 30px;
 }
+
 #form1 {
     display: flex;
     flex-direction: column;
@@ -126,19 +128,23 @@ form {
     flex-direction: column;
     justify-content: space-between;
 }
+
 #form4 {
     height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 form label {
     font-family: Arial, Helvetica, sans-serif;
     padding: 7px;
 }
-input{
+
+input {
     padding: 8px;
 }
+
 button {
     margin-top: 15px;
     border: none;
@@ -181,11 +187,12 @@ button {
     font-size: small;
 }
 
-#doc{
+#doc {
     display: flex;
     flex-direction: column;
 
 }
+
 #doc h2,
 h3 {
     font-family: Arial, Helvetica, sans-serif;
@@ -198,7 +205,7 @@ h3 {
 
 #notifications {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 70%;
 }
 
@@ -238,25 +245,32 @@ h3 {
     margin-top: 30px;
     margin-left: 40px;
 }
-#table{    
+
+#table {
     overflow-x: scroll;
     width: 100%;
 }
-#table td, th{
+
+#table td,
+th {
     border: 1px solid black;
     padding: 0px;
 }
-#table p{
+
+#table p {
     font-weight: normal;
     width: max-content;
     padding: 5px;
 }
-#table::-webkit-scrollbar{
+
+#table::-webkit-scrollbar {
     height: 0px;
 }
-table{
+
+table {
     border-collapse: collapse;
 }
+
 @media(max-width: 400px) {
 
     body {
@@ -273,12 +287,12 @@ table{
         background-color: #2980b9;
         justify-content: space-between;
         align-items: center;
-        padding:0;
+        padding: 0;
         width: 100%;
-    
+
     }
 
-    #main h1{
+    #main h1 {
         font-weight: lighter;
         font-family: Arial, Helvetica, sans-serif;
         padding-bottom: 30px;
@@ -309,11 +323,11 @@ table{
         border-color: #000;*/
     }
 
-    #table{
+    #table {
         width: auto;
     }
 
-    #buttons{
+    #buttons {
         display: flex;
     }
 
@@ -344,7 +358,8 @@ table{
         flex-direction: column;
         margin: 10px;
         flex: 1;
-        width: auto;;
+        width: auto;
+        ;
     }
 
     #form2 {

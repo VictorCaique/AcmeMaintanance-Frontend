@@ -1,38 +1,65 @@
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="/public/stylesheets/manager/estilo.css">
 
-    </head>
-        <body>
-<header id="topo">
-    <h1 class="texto">ACMI FOR MANAGER</h1>
-    <div id="buttons">
-    <a href="../index.html"><img src="/public/images/manager/home.png" alt="ícone com uma casa indicando a página inicial"></a> 
-    <a href="notifi.html"><img src="/public/images/manager/bell.png" alt="ícone com um sino indicando as notificações"></a>
-</div>
-</header>
-<main id="main">
-    <h1>Relatório</h1> 
-    <div id="doc">
-        <h2>Documento da manutenção</h2>
-        <h3>Data:</h3>
-        <h3>Observações: </h3>
-        <h3>Informações das peeças: </h3>
-        <h3>Identificação do avião: </h3>
-        <h3>Motivo da manutenção: </h3>
-        <h3>Custo da manutenção: </h3>
-        <h3>Relatório: </h3>
-    <div id="btns">
-        <button type="button"><img src="/public/images/manager/send.png"></button>
-        <button type="button"><img src="/public/images/manager/print.png"></button>
-    </div>
-</div>
-</main>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../stylesheets/manager/estilo.css">
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<footer id="rodape">
-<p>Desenvolvido por alunos da Fatec Zona Leste</p>
-<p>Todos os direitos reservados &copy;</p>
-</footer>
-        </body>
+</head>
+
+<body>
+    <header id="topo">
+        <h1 class="texto">ACME FOR MANAGER</h1>
+        <div id="buttons">
+            <a href="/"><img src="../images/manager/home.png" alt="ícone com uma casa indicando a página inicial"></a>
+            <a href="/notifi"><img src="../images/manager/bell.png"
+                    alt="ícone com um sino indicando as notificações"></a>
+        </div>
+    </header>
+    <main id="main">
+        <h1>Relatório</h1>
+        <div id="doc">
+            <h2>Documento da manutenção</h2>
+            <% var data = manutencao.data.split("T")[0].split("-")  %>
+            <h3>Data: <%= data[2]+"/"+data[1]+"/"+data[0] %> </h3>
+            <h3>Observações: <%= manutencao.observacoes %></h3>
+            <h3>Identificação do avião: Modelo: <%= manutencao.avioes.modelo %> Nº <%= manutencao.avioes.nserie %></h3>
+            <h3>Motivo da manutenção: <%= manutencao.motivoManutencao %></h3>
+            <h3>Custo da manutenção: $<%= manutencao.custo %></h3>
+            <div id="btns">
+                <!-- <button type="button"><img src="../images/manager/send.png"></button> -->
+                <button type="button" onclick="convert()"><img src="../images/manager/print.png"></button>
+            </div>
+        </div>
+    </main>
+    <script>
+        function convert() {
+            window.jsPDF = window.jspdf.jsPDF;
+            window.html2canvas = html2canvas;
+
+            var doc = new jsPDF();
+
+            // Source HTMLElement or a string containing HTML.
+            var elementHTML = document.querySelector("#main");
+
+
+            doc.html(elementHTML, {
+                callback: function (doc) {
+                    // Save the PDF
+                    doc.save('Manutencao.pdf');
+                },
+                x: 15,
+                y: 15,
+                width: 170, //target width in the PDF document
+                windowWidth: 650 //window width in CSS pixels
+            });
+        }
+    </script>
+    <footer id="rodape">
+        <p>Desenvolvido por alunos da Fatec Zona Leste</p>
+        <p>Todos os direitos reservados &copy;</p>
+    </footer>
+</body>
+
 </html>

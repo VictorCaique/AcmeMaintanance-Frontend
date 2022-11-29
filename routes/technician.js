@@ -18,4 +18,8 @@ router.get('/', function (req, res, next) {
     res.render('technician/index');
 });
 
+router.get('/notifi', function (req, res, next) {
+    res.render('technician/notifi');
+});
+
 export default router

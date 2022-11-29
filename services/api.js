@@ -130,6 +130,32 @@ export async function getTecnicoById(id) {
 
 }
 
+export async function getManutencoes() {
+    let url = 'http://localhost:8080/manutencao/';
+
+    let options = {
+        method: 'GET',
+    };
+
+    return fetch(url, options)
+        .then(res => res.json())
+        .then(json => json)
+        .catch(err => 'error:' + err);
+}
+
+export async function getManutencaoById(id) {
+    let url = `http://localhost:8080/manutencao/${id}`;
+
+    let options = {
+        method: 'GET',
+    };
+
+    return fetch(url, options)
+        .then(res => res.json())
+        .then(json => json)
+        .catch(err => 'error:' + err);
+}
+
 export async function getManutencoesFuturas(idAviao) {
     let url = 'http://localhost:8080/manutencao/manutencoesFuturas';
 
@@ -161,6 +187,53 @@ export async function postTecnico(tecnico) {
             'Content-Type': 'application/json',
         },
         body: tecnico
+    };
+
+    return fetch(url, options)
+        .then(res => res.json())
+        .then(json => json)
+        .catch(err => 'error:' + err);
+}
+
+export async function postNotificacao(idMan, not) {
+    let url = `http://localhost:8080/manutencao/${idMan}/notificar`;
+
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: not
+    };
+
+    return fetch(url, options)
+        .then(res => res.json())
+        .then(json => json)
+        .catch(err => 'error:' + err);
+}
+
+export async function getNotificacoes() {
+    let url = 'http://localhost:8080/notificacao/';
+
+    let options = {
+        method: 'GET',
+    };
+
+    return fetch(url, options)
+        .then(res => res.json())
+        .then(json => json)
+        .catch(err => 'error:' + err);
+}
+
+export async function getSearch(sp) {
+    let url = 'http://localhost:8080/manutencao/search';
+
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: sp
     };
 
     return fetch(url, options)
